@@ -1,0 +1,211 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+
+<style>
+    /* Fonte moderna e neutra — Inter (padrão em apps profissionais) */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-card: #445a9b;
+    --nav-cadastro: transparent;
+}
+
+body {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(to bottom, rgba(134, 169, 209, 0.82), #283458);
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    line-height: 1.6;
+    }
+
+/* Navbar moderna — glass effect */
+.navbar-cadastre-me {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: transparent;
+    border-bottom: 1px solid var(--nav-cadastro);
+    height: 72px;
+    display: flex;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
+}
+
+.container-nav {
+
+    max-width: 1200px;
+    width: 100%;
+    padding-left: 24px; /* espaçamento lateral consistente */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* ← Isso alinha o conteúdo à esquerda */
+
+}
+
+.container-nav h1 {
+    font-weight: 600;
+    font-size: 1.50rem;
+    color: #445a9b;
+    letter-spacing: -0.02em;
+    
+}
+
+/* Espaço para o conteúdo principal (evita sobreposição com navbar) */
+main {
+    margin-top: 120px;
+    width: 100%;
+    max-width: 480px;
+    padding: 0 24px;
+}
+
+/* Card de conteúdo (para futuros formulários) */
+.card {
+    background: transparent;
+    border-radius: 30px ;
+    padding: 32px;
+    box-shadow: transparent;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--bg-card);
+    margin-top: 24px;
+}
+
+.card h1 {
+    font-weight: 600;
+    font-size: 1.75rem;
+    margin-bottom: 8px;
+    color: #445a9b;
+}
+
+/* Estilo do conteúdo principal */
+main {
+    margin-top: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.container-main {
+    width: 100%;
+    max-width: 480px;
+    padding: 0 24px;
+}
+
+.container-main h1 {
+    font-weight: 700;
+    font-size: 1.875rem; /* 30px */
+    color: var(--text-primary);
+    margin-bottom: 32px;
+    text-align: left;
+}
+
+/* Estilo dos campos do formulário */
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 500;
+    font-size: 0.9375rem; /* 15px */
+    color: #293864;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    border: none;
+    border-radius: 12px;
+    background-color: transparent;
+    outline: none;
+}
+
+.form-group input::placeholder {
+
+    color: #dbd2d2;
+
+}
+
+/* Botão Enviar — estilo moderno e neutro */
+.btn-enviar {
+    width: 100%;
+    padding: 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #dbd2d2;
+    background: #445a9b; 
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s, transform 0.15s, box-shadow 0.2s;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.25);
+}
+
+.btn-enviar:hover {
+    background: transparent; /* tom ligeiramente mais escuro */
+    transform: translateY(-2px);
+}
+
+.btn-enviar:active {
+    transform: translateY(0);
+}
+
+.btn-enviar:focus {
+    outline: none;
+    background: linear-gradient(to bottom, rgba(134, 169, 209, 0.82), #283458),
+}
+</style>
+
+<body>
+    <nav class="navbar-cadastre-me">
+        <div class="container-nav">
+            <h1>Cadastre-se</h1>
+        </div>
+    </nav>
+
+    <main>
+        <div class="card">
+            <h1>Cadastro de Usuários</h1>
+            <form action="{% url 'listagem_usuarios' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" name="nome" required placeholder="Digite seu nome..">
+                </div>
+                <div class="form-group">
+                    <label for="idade">Idade</label>
+                    <input type="number" id="idade" name="idade" min="1" max="120" required placeholder="Digite sua idade..">
+                </div>
+                <button type="submit" class="btn-enviar">Enviar</button>
+            </form>
+        </div>
+    </main>
+</body>
+
+</html>
